@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\escuela\\grafica\\lab\\Configinicial\\",
+  "WorkspaceRootPath": "D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FB33E3B-854B-4710-9D8F-DB6E250B9493}|Configinicial\\Configinicial.vcxproj|D:\\escuela\\grafica\\lab\\Configinicial\\Configinicial\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1FB33E3B-854B-4710-9D8F-DB6E250B9493}|Configinicial\\Configinicial.vcxproj|solutionrelative:Configinicial\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{1FB33E3B-854B-4710-9D8F-DB6E250B9493}|Configinicial\\Configinicial.vcxproj|D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB33E3B-854B-4710-9D8F-DB6E250B9493}|Configinicial\\Configinicial.vcxproj|solutionrelative:Configinicial\\Main_Dibujo2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Main.cpp",
-              "DocumentMoniker": "D:\\escuela\\grafica\\lab\\Configinicial\\Configinicial\\Main.cpp",
-              "RelativeDocumentMoniker": "Configinicial\\Main.cpp",
-              "ToolTip": "D:\\escuela\\grafica\\lab\\Configinicial\\Configinicial\\Main.cpp",
-              "RelativeToolTip": "Configinicial\\Main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Title": "Main_Dibujo2D.cpp",
+              "DocumentMoniker": "D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp",
+              "RelativeDocumentMoniker": "Configinicial\\Main_Dibujo2D.cpp",
+              "ToolTip": "D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp",
+              "RelativeToolTip": "Configinicial\\Main_Dibujo2D.cpp",
+              "ViewState": "AgIAAG8AAAAAAAAAAADgv3sAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-02-09T19:03:45.316Z",
+              "WhenOpened": "2025-02-12T01:31:34.127Z",
               "EditorCaption": ""
             }
           ]
