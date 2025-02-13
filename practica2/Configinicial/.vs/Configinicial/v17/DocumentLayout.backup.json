@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\",
+  "WorkspaceRootPath": "D:\\escuela\\grafica\\ComputacionGraficaLab\\practica2\\Configinicial\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FB33E3B-854B-4710-9D8F-DB6E250B9493}|Configinicial\\Configinicial.vcxproj|D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{1FB33E3B-854B-4710-9D8F-DB6E250B9493}|Configinicial\\Configinicial.vcxproj|D:\\escuela\\grafica\\ComputacionGraficaLab\\practica2\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB33E3B-854B-4710-9D8F-DB6E250B9493}|Configinicial\\Configinicial.vcxproj|solutionrelative:Configinicial\\Main_Dibujo2D.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Main_Dibujo2D.cpp",
-              "DocumentMoniker": "D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp",
+              "DocumentMoniker": "D:\\escuela\\grafica\\ComputacionGraficaLab\\practica2\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp",
               "RelativeDocumentMoniker": "Configinicial\\Main_Dibujo2D.cpp",
-              "ToolTip": "D:\\escuela\\grafica\\ComputacionGraficaLab\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp*",
-              "RelativeToolTip": "Configinicial\\Main_Dibujo2D.cpp*",
-              "ViewState": "AgIAAEEAAAAAAAAAAADwv1cAAAADAAAAAAAAAA==",
+              "ToolTip": "D:\\escuela\\grafica\\ComputacionGraficaLab\\practica2\\Configinicial\\Configinicial\\Main_Dibujo2D.cpp",
+              "RelativeToolTip": "Configinicial\\Main_Dibujo2D.cpp",
+              "ViewState": "AgIAAA0AAAAAAAAAAADgvxkAAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-12T01:31:34.127Z",
               "EditorCaption": ""
