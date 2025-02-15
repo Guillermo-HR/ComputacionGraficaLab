@@ -1,0 +1,4 @@
+﻿  Main_Dibujo2D.cpp
+  LINK : no se encontró D:\escuela\grafica\Computacion-grafica-laboratorio\previoPrimitivas2D\Configinicial\Debug\Configinicial.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+  Configinicial.vcxproj -> D:\escuela\grafica\Computacion-grafica-laboratorio\previoPrimitivas2D\Configinicial\Debug\Configinicial.exe
