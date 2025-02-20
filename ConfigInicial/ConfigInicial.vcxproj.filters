@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Archivos de origen\Shader">
-      <UniqueIdentifier>{befacdd1-9d57-4475-ac0c-c6f318c974e9}</UniqueIdentifier>
+      <UniqueIdentifier>{a6228572-0227-4bd5-9541-7a9c60dcdf0d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

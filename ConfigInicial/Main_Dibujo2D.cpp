@@ -23,7 +23,7 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Dibujo de Primitivas en 2D", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Dibujo de Primitivas en 2D Guillermo Hernández", NULL, NULL);
 	glfwSetFramebufferSizeCallback(window, resize);
 	
 	//Verificaci�n de errores de creacion  ventana
@@ -59,15 +59,45 @@ int main() {
 
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	float vertices[] = {
-		0.5f,  0.5f, 0.0f,    1.0f,0.0f,0.0f,  // top right
-		0.5f, -0.5f, 0.0f,    1.0f,1.0f,0.0f,  // bottom right
-		-0.5f, -0.5f, 0.0f,   1.0f,0.0f,1.0f,  // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f,1.0f,0.0f, // top left 
+		-0.88f, 0.51f,  0.0f,    0.0f, 0.0f, 1.0f, // C
+		-0.18f, -0.07f, 0.0f,    0.0f, 1.0f, 0.0f, // D
+		0.15f,  0.32f,  0.0f,    0.0f, 1.0f, 1.0f, // E
+		0.05f,  -0.5f,  0.0f,    1.0f, 0.0f, 0.0f, // F
+		-0.1f,  -0.6f,  0.0f,    1.0f, 0.0f, 1.0f, // G
+		0.3f,   -0.73f, 0.0f,    1.0f, 1.0f, 0.0f, // H
+		0.26f,  -0.36f, 0.0f,    1.0f, 1.0f, 1.0f, // I
+		0.26f,  0.31f,  0.0f,    0.0f, 0.0f, 1.0f, // J
+		0.27f,  0.41f,  0.0f,    0.0f, 1.0f, 0.0f, // K
+		0.6f,   0.42f,  0.0f,    0.0f, 1.0f, 1.0f, // L
+		0.66f,  0.23f,  0.0f,    1.0f, 0.0f, 0.0f, // M
+		0.7f,   0.06f,  0.0f,    1.0f, 0.0f, 1.0f, // N
+		0.62f,  0.18f,  0.0f,    1.0f, 1.0f, 0.0f, // O
+		0.6f,   0.15f,  0.0f,    1.0f, 1.0f, 1.0f, // P
+		0.73f,  0.09f,  0.0f,    0.0f, 0.0f, 1.0f, // Q
+		0.69f,  -0.09f, 0.0f,    0.0f, 1.0f, 0.0f, // R
+		0.81f,  0.43f,  0.0f,    0.0f, 1.0f, 1.0f, // S
+		0.84f,  0.58f,  0.0f,    1.0f, 0.0f, 0.0f, // T
+		0.86f,  0.47f,  0.0f,    1.0f, 0.0f, 1.0f, // U
+		0.51f,  0.71f,  0.0f,    1.0f, 1.0f, 0.0f, // V
+		0.08f,  -0.26f, 0.0f,	 1.0f, 1.0f, 1.0f, // W
+		0.63f,  0.0f,   0.0f,	 0.0f, 0.0f, 1.0f, // Z
+		0.82f,  0.47f,  0.0f,    0.0f, 1.0f, 0.0f, // A1
+		0.36f,  -0.27f, 0.0f,	 1.0f, 0.0f, 0.0f, // B1
+		0.4f,   -0.23f, 0.0f,	 1.0f, 0.0f, 1.0f, // C1
+		0.67f,  -0.38f, 0.0f,	 1.0f, 1.0f, 0.0f, // D1
 	};
 	unsigned int indices[] = {  // note that we start from 0!
-		3,2,1,// second Triangle
-		0,1,3,
-		
+		0, 1, 2, // cola
+		2, 1, 4, 3, // pierna
+		3, 4, 5, // pie adelante
+		2, 20, 6, 7, // espalda
+		8, 6, 10, 9, // pecho
+		6, 11, 13, // brazo adelante
+		11, 21, 15, // mano adelante
+		12, 13, 11, 15, 14, // brazo/mano atras
+		24, 23, 25, // pie atras
+		8, 16, 17, 19, // cabeza
+		22, 18, 17, // boca
 	};
 
 
@@ -118,16 +148,17 @@ int main() {
 		// Draw our first triangle
         ourShader.Use();
         glBindVertexArray(VAO);
-
-
-        glPointSize(1);
-        glDrawArrays(GL_POINTS,0,1);
-        
-        //glDrawArrays(GL_LINES,0,2);
-        //glDrawArrays(GL_LINE_LOOP,0,4);
-        
-        //glDrawArrays(GL_TRIANGLES,0,3);
-        //glDrawElements(GL_TRIANGLES, 3,GL_UNSIGNED_INT,0);
+        glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_INT, (void*)(0 * sizeof(unsigned int))); // cola
+		glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, (void*)(3 * sizeof(unsigned int))); // pierna
+		glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_INT, (void*)(7 * sizeof(unsigned int))); // pie adelante
+		glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, (void*)(10 * sizeof(unsigned int))); // espalda
+		glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, (void*)(14 * sizeof(unsigned int))); // pecho
+		glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_INT, (void*)(18 * sizeof(unsigned int))); // brazo adelante
+		glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_INT, (void*)(21 * sizeof(unsigned int))); // mano adelante
+		glDrawElements(GL_POLYGON, 5, GL_UNSIGNED_INT, (void*)(24 * sizeof(unsigned int))); // brao/mano atras
+		glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_INT, (void*)(29 * sizeof(unsigned int))); // pie atras
+		glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, (void*)(32 * sizeof(unsigned int))); // cabeza
+		glDrawElements(GL_POLYGON, 3, GL_UNSIGNED_INT, (void*)(36 * sizeof(unsigned int))); // boca
 
         
         
