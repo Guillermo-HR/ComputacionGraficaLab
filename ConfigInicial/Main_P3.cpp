@@ -1,3 +1,8 @@
+// Hernández Ruiz de Esparza Guillermo
+// 319220553
+// Practica 3
+// Fecha de entrega: 22/feb/2025
+
 #include<iostream>
 
 //#define GLEW_STATIC
