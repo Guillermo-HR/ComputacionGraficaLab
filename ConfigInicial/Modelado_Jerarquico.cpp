@@ -273,7 +273,7 @@ int main() {
 
 		// Dedo 2
 		//Model dedo2 A
-		model = glm::translate(modelTemp2, glm::vec3(0.25, 0.35, 0.375f));
+		model = glm::translate(modelTemp2, glm::vec3(0.25, 0.6, 0.375f));
 		model = glm::rotate(model, glm::radians(dedo1a), glm::vec3(0.0f, 0.0, 1.0f));
 		modelTemp = model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.0f, 0.3f, 0.25f));
@@ -304,7 +304,7 @@ int main() {
 
 		// Dedo 3
 		//Model dedo3 A
-		model = glm::translate(modelTemp2, glm::vec3(0.25, 0.35, 0.0f));
+		model = glm::translate(modelTemp2, glm::vec3(0.25, 0.6, 0.0f));
 		model = glm::rotate(model, glm::radians(dedo1a), glm::vec3(0.0f, 0.0, 1.0f));
 		modelTemp = model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.0f, 0.3f, 0.25f));
@@ -335,7 +335,7 @@ int main() {
 
 		// Dedo 4
 		//Model dedo4 A
-		model = glm::translate(modelTemp2, glm::vec3(0.25, 0.35, -0.375f));
+		model = glm::translate(modelTemp2, glm::vec3(0.25, 0.6, -0.375f));
 		model = glm::rotate(model, glm::radians(dedo1a), glm::vec3(0.0f, 0.0, 1.0f));
 		modelTemp = model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.0f, 0.3f, 0.25f));
@@ -376,10 +376,10 @@ int main() {
 		glDrawArrays(GL_TRIANGLES, 0, 36);//D 5
 
 		//Model dedo5 B
-		model = glm::translate(modelTemp, glm::vec3(0.5, 0.0, 0.0f));
+		model = glm::translate(modelTemp, glm::vec3(0.3, 0.0, 0.0f));
 		model = glm::rotate(model, glm::radians(dedo2b), glm::vec3(0.0f, 1.0, 0.0f));
 		modelTemp = model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f, 0.3f, 0.25f));
+		model = glm::scale(model, glm::vec3(0.6f, 0.3f, 0.25f));
 		color = glm::vec3(1.0f, 0.0f, 1.0f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -420,9 +420,11 @@ int main() {
 	 if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 		 rot -= 0.18f;
 	 if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
-		 hombro += 0.18f;
+		 if (hombro + 0.18 < 0.0f)
+			 hombro += 0.18f;
 	 if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
-		 hombro -= 0.18f;
+		 if (hombro - 0.18 > -90.0f)
+			 hombro -= 0.18f;
 	 if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
 		 codo += 0.18f;
 	 if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
