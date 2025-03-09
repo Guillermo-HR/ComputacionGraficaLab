@@ -271,7 +271,6 @@ int main() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);//F 1
 
-		/*
 		// Dedo 2
 		//Model dedo2 A
 		model = glm::translate(modelTemp2, glm::vec3(0.25, 0.45, 0.3f));
@@ -386,7 +385,6 @@ int main() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);//E 5
 		
-		*/
 		glBindVertexArray(0);
 
 		
