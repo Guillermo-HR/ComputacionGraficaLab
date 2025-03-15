@@ -1,3 +1,9 @@
+// Guillermo Hernández Ruiz de Esparza
+// 319220553
+// Practica 6
+// 15/3/25
+
+
 // Std. Includes
 #include <string>
 
@@ -54,7 +60,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Carga de modelos y camara sintetica", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Carga de modelos y camara sintetica Guillermo Hernandez", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -95,6 +101,7 @@ int main( )
     
     // Load models
     Model dog((char*)"Models/RedDog.obj");
+	Model escudo((char*)"Models/escudo.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
   
@@ -124,12 +131,17 @@ int main( )
         // Draw the loaded model
         glm::mat4 model(1);
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		dog.Draw(shader);
         
-		model = glm::translate(model, glm::vec3(3.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         dog.Draw(shader);
+
+		model = glm::scale(model, glm::vec3(0.35f, 0.35f, 0.35f));
+		model = glm::translate(model, glm::vec3(0.5f, -0.1f, 0.8f));
+        model = glm::rotate(model, glm::degrees(-70.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        escudo.Draw(shader);
+
 
         // Swap the buffers
         glfwSwapBuffers( window );
