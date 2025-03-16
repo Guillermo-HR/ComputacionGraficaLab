@@ -1,7 +1,7 @@
 // Guillermo Hernández Ruiz de Esparza
 // 319220553
 // Practica 6
-// 15/3/25
+// 16/3/25
 
 
 // Std. Includes
@@ -100,8 +100,12 @@ int main( )
     Shader shader( "Shader/modelLoading.vs", "Shader/modelLoading.frag" );
     
     // Load models
-    Model dog((char*)"Models/RedDog.obj");
-	Model escudo((char*)"Models/escudo.obj");
+    Model dog((char*)"Models/perro/RedDog.obj");
+	Model escudo((char*)"Models/escudo/escudo.obj");
+    Model casa1((char*)"Models/casa1/casa1.obj");
+    Model casa2((char*)"Models/casa2/casa2.obj");
+    Model camino((char*)"Models/camino/camino.obj");
+    Model estatua((char*)"Models/estatua/estatua.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
   
@@ -132,15 +136,46 @@ int main( )
         glm::mat4 model(1);
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         
+        // perro
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         dog.Draw(shader);
 
-		model = glm::scale(model, glm::vec3(0.35f, 0.35f, 0.35f));
-		model = glm::translate(model, glm::vec3(0.5f, -0.1f, 0.8f));
-        model = glm::rotate(model, glm::degrees(-70.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		// escudo
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		model = glm::translate(model, glm::vec3(0.4f, -0.4f, 0.6f));
+        model = glm::rotate(model, glm::degrees(100.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         escudo.Draw(shader);
+
+        // casa1
+        model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+        model = glm::translate(model, glm::vec3(-0.4f, 0.38f, -0.25f));
+        model = glm::rotate(model, glm::degrees(-10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        casa1.Draw(shader);
+
+        // casa2
+        model = glm::translate(model, glm::vec3(1.2f, 0.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        casa2.Draw(shader);
+
+        // camino
+		model = glm::scale(model, glm::vec3(2.0f, 1.0f, 2.0f));
+        model = glm::translate(model, glm::vec3(-0.3f,-0.4f, -0.35f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        camino.Draw(shader);
+
+        // camino complemento
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        camino.Draw(shader);
+
+		// estatua
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.3f));
+		model = glm::translate(model, glm::vec3(-1.6f, 0.47f, 0.0f));
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		estatua.Draw(shader);
 
 
         // Swap the buffers
