@@ -1,5 +1,5 @@
 // Guillermo Hernandez Ruiz de Esparza
-// previo 7
+// practica 7
 // 18/03/25
 // 319220553
 #include <iostream>
@@ -103,18 +103,67 @@ int main()
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] =
 	{
+		/* Numeracion de las caras
+		         6
+		    1    2    3    4
+			     5
+		
+		*/
+
+		// Cara 1
 		// Positions            // Colors              // Texture Coords
-		-0.5f, -0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,0.0f,
-		0.5f, -0.5f, 0.0f,	   1.0f, 1.0f,1.0f,		1.0f,0.0f,
-		0.5f,  0.5f, 0.0f,     1.0f, 1.0f,1.0f,	    1.0f,1.0f,
-		-0.5f,  0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,1.0f,
+		-1.5f, -0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.0f,0.33f, // inferior izq
+		-0.5f, -0.5f, 0.5f,	   1.0f, 1.0f,1.0f,		0.25f,0.33f, // inferior der
+		1.5f,  0.5f, 0.5f,     1.0f, 1.0f,1.0f,	    0.25f,0.66f, // superior der
+		0.5f,  0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.0f,0.66f, // superior izq
+		/*
+		// Cara 2
+		// Positions            // Colors              // Texture Coords
+		-0.5f, -0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.33f, // inferior izq
+		0.5f, -0.5f, 0.5f,	   1.0f, 1.0f,1.0f,		0.5f,0.33f, // inferior der
+		0.5f,  0.5f, 0.5f,     1.0f, 1.0f,1.0f,	    0.5f,0.66f, // superior der
+		-0.5f,  0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.66f, // superior izq
+
+		// Cara 3
+		// Positions            // Colors              // Texture Coords
+		0.5f, -0.5f, 0.5f,	  1.0f, 1.0f,1.0f,		0.5f,0.33f, // inferior izq
+		1.5f, -0.5f, -0.5f,	   1.0f, 1.0f,1.0f,		0.75f,0.33f, // inferior der
+		1.5f,  0.5f, -0.5f,     1.0f, 1.0f,1.0f,	    0.75f,0.66f, // superior der
+		0.5f,  0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.5f,0.66f, // superior izq
+
+		// Cara 4
+		// Positions            // Colors              // Texture Coords
+		1.5f, -0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.75f,0.33f, // inferior izq
+		2.5f, -0.5f, -0.5f,	   1.0f, 1.0f,1.0f,		1.0f,0.33f, // inferior der
+		2.5f,  0.5f, -0.5f,     1.0f, 1.0f,1.0f,	    1.0f,0.66f, // superior der
+		1.5f,  0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.75f,0.66f, // superior izq
+
+		// Cara 5
+		// Positions            // Colors              // Texture Coords
+		-0.5f, -1.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.0f, // inferior izq
+		0.5f, -1.5f, -0.5f,	   1.0f, 1.0f,1.0f,		0.5f,0.0f, // inferior der
+		0.5f,  -0.5f, 0.5f,     1.0f, 1.0f,1.0f,	0.5f,0.33f, // superior der
+		-0.5f,  -0.5f, 0.5f,    1.0f, 1.0f,1.0f,	0.25f,0.33f, // superior izq
+
+		// Cara 6
+		// Positions            // Colors              // Texture Coords
+		-0.5f, 0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.0f, // inferior izq
+		0.5f, 0.5f, 0.5f,	   1.0f, 1.0f,1.0f,		0.5f,0.0f, // inferior der
+		0.5f,  1.5f, -0.5f,     1.0f, 1.0f,1.0f,	    0.5f,0.33f, // superior der
+		-0.5f,  1.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.33f, // superior izq
+		*/
 	};
 
 	GLuint indices[] =
 	{  // Note that we start from 0!
-		0,1,3,
-		1,2,3
-	
+		0,1,3, 1,2,3, // Cara 1
+		/*
+		4,5,7, 5,6,7, // Cara 2
+		8,9,11, 9,10,11, // Cara 3
+		12,13,15, 13,14,15, // Cara 4
+		16,17,19, 17,18,19, // Cara 5
+		20,21,23, 21,22,23 // Cara 6
+	*/
 	};
 
 	// First, set the container's VAO (and VBO)
@@ -153,13 +202,13 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	// Diffuse map
-	image = stbi_load("images/window.png", &textureWidth, &textureHeight, &nrChannels,0);
+	image = stbi_load("images/cuboRubik.png", &textureWidth, &textureHeight, &nrChannels,0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	if (image)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
