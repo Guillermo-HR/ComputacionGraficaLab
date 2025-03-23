@@ -1,6 +1,6 @@
 // Guillermo Hernandez Ruiz de Esparza
 // practica 7
-// 18/03/25
+// 23/03/25
 // 319220553
 #include <iostream>
 #include <cmath>
@@ -103,67 +103,57 @@ int main()
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] =
 	{
-		/* Numeracion de las caras
-		         6
-		    1    2    3    4
-			     5
-		
-		*/
-
 		// Cara 1
-		// Positions            // Colors              // Texture Coords
-		-1.5f, -0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.0f,0.33f, // inferior izq
-		-0.5f, -0.5f, 0.5f,	   1.0f, 1.0f,1.0f,		0.25f,0.33f, // inferior der
-		1.5f,  0.5f, 0.5f,     1.0f, 1.0f,1.0f,	    0.25f,0.66f, // superior der
-		0.5f,  0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.0f,0.66f, // superior izq
-		/*
-		// Cara 2
-		// Positions            // Colors              // Texture Coords
-		-0.5f, -0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.33f, // inferior izq
-		0.5f, -0.5f, 0.5f,	   1.0f, 1.0f,1.0f,		0.5f,0.33f, // inferior der
-		0.5f,  0.5f, 0.5f,     1.0f, 1.0f,1.0f,	    0.5f,0.66f, // superior der
-		-0.5f,  0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.66f, // superior izq
+		// Positions          // Colors           // Texture Coords
+		-0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.09f, 0.91f, // sup izq
+		-0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.91f, // sup der
+		-0.5f, -0.5f, -0.5f,	1.0f, 1.0f,1.0f,		0.09f, 0.69f, // inf izq
+		-0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.69f, // inf der
+		
+		//Cara 2
+		// Positions          // Colors           // Texture Coords
+		-0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.91f, // sup izq
+		0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.91f, // sup der
+		-0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.69f, // inf izq
+		0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.69f, // inf der
 
-		// Cara 3
-		// Positions            // Colors              // Texture Coords
-		0.5f, -0.5f, 0.5f,	  1.0f, 1.0f,1.0f,		0.5f,0.33f, // inferior izq
-		1.5f, -0.5f, -0.5f,	   1.0f, 1.0f,1.0f,		0.75f,0.33f, // inferior der
-		1.5f,  0.5f, -0.5f,     1.0f, 1.0f,1.0f,	    0.75f,0.66f, // superior der
-		0.5f,  0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.5f,0.66f, // superior izq
+		//Cara 3
+		// Positions          // Colors           // Texture Coords
+		0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.64f, 0.46f, // sup izq
+		0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.91f, 0.46f, // sup der
+		0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.64f, 0.26f, // inf izq
+		0.5f, -0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.91f, 0.26f, // inf der
 
-		// Cara 4
-		// Positions            // Colors              // Texture Coords
-		1.5f, -0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.75f,0.33f, // inferior izq
-		2.5f, -0.5f, -0.5f,	   1.0f, 1.0f,1.0f,		1.0f,0.33f, // inferior der
-		2.5f,  0.5f, -0.5f,     1.0f, 1.0f,1.0f,	    1.0f,0.66f, // superior der
-		1.5f,  0.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.75f,0.66f, // superior izq
+		//Cara 4
+		// Positions          // Colors           // Texture Coords
+		0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.46f, // sup izq
+		-0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.46f, // sup der
+		0.5f, -0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.26f, // inf izq
+		-0.5f, -0.5f, -0.5f,	1.0f, 1.0f,1.0f,		0.63f, 0.26f, // inf der
 
 		// Cara 5
-		// Positions            // Colors              // Texture Coords
-		-0.5f, -1.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.0f, // inferior izq
-		0.5f, -1.5f, -0.5f,	   1.0f, 1.0f,1.0f,		0.5f,0.0f, // inferior der
-		0.5f,  -0.5f, 0.5f,     1.0f, 1.0f,1.0f,	0.5f,0.33f, // superior der
-		-0.5f,  -0.5f, 0.5f,    1.0f, 1.0f,1.0f,	0.25f,0.33f, // superior izq
+		// Positions          // Colors           // Texture Coords
+		-0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.37f, 0.25f, // sup izq
+		0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.25f, // sup der
+		-0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.37f, 0.04f, // inf izq
+		0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.04f, // inf der
 
 		// Cara 6
-		// Positions            // Colors              // Texture Coords
-		-0.5f, 0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.0f, // inferior izq
-		0.5f, 0.5f, 0.5f,	   1.0f, 1.0f,1.0f,		0.5f,0.0f, // inferior der
-		0.5f,  1.5f, -0.5f,     1.0f, 1.0f,1.0f,	    0.5f,0.33f, // superior der
-		-0.5f,  1.5f, -0.5f,    1.0f, 1.0f,1.0f,		0.25f,0.33f, // superior izq
-		*/
+		// Positions          // Colors           // Texture Coords
+		-0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.69f, // sup izq
+		0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.69f, // sup der
+		-0.5f, -0.5f, -0.5f,	1.0f, 1.0f,1.0f,		0.36f, 0.47f, // inf izq
+		0.5f, -0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.47f // inf der
 	};
 
 	GLuint indices[] =
 	{  // Note that we start from 0!
-		0,1,3, 1,2,3, // Cara 1
-		/*
-		4,5,7, 5,6,7, // Cara 2
-		8,9,11, 9,10,11, // Cara 3
-		12,13,15, 13,14,15, // Cara 4
-		16,17,19, 17,18,19, // Cara 5
-		20,21,23, 21,22,23 // Cara 6
-	*/
+		0, 1, 2, 1, 2, 3, // Cara 1
+		4, 5, 6, 5, 6, 7, // Cara 2
+		8, 9, 10, 9, 10, 11, // Cara 3
+		12, 13, 14, 13, 14, 15, // Cara 4
+		16, 17, 18, 17, 18, 19, // Cara 5
+		20, 21, 22, 21, 22, 23 // Cara 6
 	};
 
 	// First, set the container's VAO (and VBO)
@@ -257,7 +247,7 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		// Draw the light object (using light's vertex attributes)
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 		// Swap the screen buffers
