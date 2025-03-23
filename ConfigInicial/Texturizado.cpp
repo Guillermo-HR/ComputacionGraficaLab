@@ -1,6 +1,6 @@
 // Guillermo Hernandez Ruiz de Esparza
-// previo 7
-// 18/03/25
+// practica 7
+// 23/03/25
 // 319220553
 #include <iostream>
 #include <cmath>
@@ -103,18 +103,57 @@ int main()
 	// Set up vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] =
 	{
-		// Positions            // Colors              // Texture Coords
-		-0.5f, -0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,0.0f,
-		0.5f, -0.5f, 0.0f,	   1.0f, 1.0f,1.0f,		1.0f,0.0f,
-		0.5f,  0.5f, 0.0f,     1.0f, 1.0f,1.0f,	    1.0f,1.0f,
-		-0.5f,  0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,1.0f,
+		// Cara 1
+		// Positions          // Colors           // Texture Coords
+		-0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.09f, 0.91f, // sup izq
+		-0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.91f, // sup der
+		-0.5f, -0.5f, -0.5f,	1.0f, 1.0f,1.0f,		0.09f, 0.69f, // inf izq
+		-0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.69f, // inf der
+		
+		//Cara 2
+		// Positions          // Colors           // Texture Coords
+		-0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.91f, // sup izq
+		0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.91f, // sup der
+		-0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.69f, // inf izq
+		0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.69f, // inf der
+
+		//Cara 3
+		// Positions          // Colors           // Texture Coords
+		0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.64f, 0.46f, // sup izq
+		0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.91f, 0.46f, // sup der
+		0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.64f, 0.26f, // inf izq
+		0.5f, -0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.91f, 0.26f, // inf der
+
+		//Cara 4
+		// Positions          // Colors           // Texture Coords
+		0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.46f, // sup izq
+		-0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.46f, // sup der
+		0.5f, -0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.26f, // inf izq
+		-0.5f, -0.5f, -0.5f,	1.0f, 1.0f,1.0f,		0.63f, 0.26f, // inf der
+
+		// Cara 5
+		// Positions          // Colors           // Texture Coords
+		-0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.37f, 0.25f, // sup izq
+		0.5f, 0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.25f, // sup der
+		-0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.37f, 0.04f, // inf izq
+		0.5f, 0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.04f, // inf der
+
+		// Cara 6
+		// Positions          // Colors           // Texture Coords
+		-0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.36f, 0.69f, // sup izq
+		0.5f, -0.5f, 0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.69f, // sup der
+		-0.5f, -0.5f, -0.5f,	1.0f, 1.0f,1.0f,		0.36f, 0.47f, // inf izq
+		0.5f, -0.5f, -0.5f,		1.0f, 1.0f,1.0f,		0.63f, 0.47f // inf der
 	};
 
 	GLuint indices[] =
 	{  // Note that we start from 0!
-		0,1,3,
-		1,2,3
-	
+		0, 1, 2, 1, 2, 3, // Cara 1
+		4, 5, 6, 5, 6, 7, // Cara 2
+		8, 9, 10, 9, 10, 11, // Cara 3
+		12, 13, 14, 13, 14, 15, // Cara 4
+		16, 17, 18, 17, 18, 19, // Cara 5
+		20, 21, 22, 21, 22, 23 // Cara 6
 	};
 
 	// First, set the container's VAO (and VBO)
@@ -153,13 +192,13 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	// Diffuse map
-	image = stbi_load("images/window.png", &textureWidth, &textureHeight, &nrChannels,0);
+	image = stbi_load("images/cuboRubik.png", &textureWidth, &textureHeight, &nrChannels,0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	if (image)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -208,7 +247,7 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		// Draw the light object (using light's vertex attributes)
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 		// Swap the screen buffers
