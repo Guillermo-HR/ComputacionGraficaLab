@@ -160,7 +160,7 @@ int main()
 	Shader lightingShader("Shader/lighting.vs", "Shader/lighting.frag");
 	Shader lampShader("Shader/lamp.vs", "Shader/lamp.frag");
 
-	Model Dog((char*)"Models/ball/ball.obj");
+	Model Dog((char*)"Models/vaso/vaso.obj");
 	Model Piso((char*)"Models/piso/piso.obj");
 
 
