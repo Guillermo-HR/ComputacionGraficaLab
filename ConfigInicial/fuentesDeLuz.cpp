@@ -1,7 +1,7 @@
 // Guillermo Hern�ndez Ruiz de Esparza
 // 319220553
 // Practica 9
-// 1/4/25
+// 6/4/25
 
 
 #include <iostream>
@@ -47,11 +47,14 @@ bool keys[1024];
 bool firstMouse = true;
 // Light attributes
 glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
+glm::vec3 dirLight(0.0f, 0.0f, 35.0f);
+glm::vec3 moveDirLight(0.0f, 0.0f, 0.0f);
+bool dia = true;
 bool active;
 
 // Positions of the point lights
 glm::vec3 pointLightPositions[] = {
-	glm::vec3(0.0f,0.0f, 0.0f),
+	glm::vec3(-1.0f,-0.32f, 0.0f),
 	glm::vec3(0.0f,0.0f, 0.0f),
 	glm::vec3(0.0f,0.0f,  0.0f),
 	glm::vec3(0.0f,0.0f, 0.0f)
@@ -160,9 +163,15 @@ int main()
 	Shader lightingShader("Shader/lighting.vs", "Shader/lighting.frag");
 	Shader lampShader("Shader/lamp.vs", "Shader/lamp.frag");
 
-	Model Dog((char*)"Models/perro/RedDog.obj");
-	Model Piso((char*)"Models/piso/piso.obj");
-
+	Model dog((char*)"Models/perro/RedDog.obj");
+	Model escudo((char*)"Models/escudo/escudo.obj");
+	Model casa1((char*)"Models/casa1/casa1.obj");
+	Model casa2((char*)"Models/casa2/casa2.obj");
+	Model camino((char*)"Models/camino/camino.obj");
+	Model estatua((char*)"Models/estatua/estatua.obj");
+	Model sol((char*)"Models/sol/sol.obj");
+	Model luna((char*)"Models/luna/luna.obj");
+	Model fogata((char*)"Models/fogata/fogata.obj");
 
 
 	// First, set the container's VAO (and VBO)
@@ -200,7 +209,12 @@ int main()
 		DoMovement();
 
 		// Clear the colorbuffer
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		if (dia) {
+			glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
+		}
+		else {
+			glClearColor(0.0f, 0.0f, 0.1f, 1.0f);
+		}
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// OpenGL options
@@ -220,34 +234,31 @@ int main()
 		GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
 		glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 
-
 		// Directional light
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.direction"), 1.0f, 0.0f, 0.0f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"), 0.0f, 0.0f, 0.1f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 0.0f, 0.0f, 0.5f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.specular"), 0.0f, 0.0f, 0.0f);
-
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.direction"), -(dirLight.x+moveDirLight.x), -(dirLight.y + moveDirLight.y), -(dirLight.z + moveDirLight.z));
+		if (dia) {
+			glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"), 0.4f, 0.3f, 0.2f);
+			glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 2.0f, 1.8f, 1.6f);
+			glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.specular"), 1.8f, 1.8f, 1.6f);
+		}
+		else {
+			glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"), 0.1f, 0.15f, 0.3f);
+			glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 0.8f, 1.4f, 2.0f);
+			glUniform3f(glGetUniformLocation(lightingShader.Program, "lidirLightght.specular"), 0.6f, 1.2f, 1.8f);
+		}
 
 		// Point light 1
-		glm::vec3 lightColor;
-		lightColor.x = abs(sin(glfwGetTime() * Light1.x));
-		lightColor.y = abs(sin(glfwGetTime() * Light1.y));
-		lightColor.z = sin(glfwGetTime() * Light1.z);
-
-
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].position"), pointLightPositions[0].x, pointLightPositions[0].y, pointLightPositions[0].z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].ambient"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].diffuse"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].specular"), 1.0f, 1.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].ambient"), 0.5f, 0.2f, 0.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].diffuse"), 2.5f, 1.2f, 0.5f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].specular"), 3.0f, 1.5f, 0.7f);
 		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[0].constant"), 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[0].linear"), 0.045f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[0].quadratic"), 0.075f);
-
-
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[0].linear"), 0.2f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[0].quadratic"), 0.8f);
 
 		// Point light 2
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].position"), pointLightPositions[1].x, pointLightPositions[1].y, pointLightPositions[1].z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].ambient"), 0.05f, 0.05f, 0.05f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].ambient"), 0.0f, 0.0f, 0.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].diffuse"), 0.0f, 0.0f, 0.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].specular"), 0.0f, 0.0f, 0.0f);
 		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[1].constant"), 1.0f);
@@ -273,20 +284,39 @@ int main()
 		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[3].quadratic"), 0.0f);
 
 		// SpotLight
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"), camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.direction"), camera.GetFront().x, camera.GetFront().y, camera.GetFront().z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.ambient"), 0.6f, 0.6f, 0.6f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.diffuse"), 0.6f, 0.6f, 0.6f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.specular"), 0.0f, 0.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"), 0.9f, 0.0f, 11.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.direction"), 0.7f, 4.14f, 14.84f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.ambient"), 0.3f, 0.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.diffuse"), 1.5f, 0.2f, 0.2f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.specular"), 2.0f, 0.3f, 0.3f);
 		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.constant"), 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.linear"), 0.3f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.quadratic"), 0.7f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.cutOff"), glm::cos(glm::radians(12.0f)));
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.outerCutOff"), glm::cos(glm::radians(18.0f)));
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.linear"), 0.1f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.quadratic"), 0.05f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.cutOff"), glm::cos(glm::radians(30.0f)));
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.outerCutOff"), glm::cos(glm::radians(40.0f)));
 
 		// Set material properties
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 16.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.6f, 0.5f, 0.4f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.8f, 0.7f, 0.6f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.7f, 0.7f, 0.6f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
+		
+		glm::mat4 modelSolLuna(1);
+		modelSolLuna = glm::translate(modelSolLuna, glm::vec3(dirLight.x+ moveDirLight.x, dirLight.y + moveDirLight.y, dirLight.z + moveDirLight.z));
+		glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelSolLuna));
 
+		// Set lights properties
+		if (dia) {
+			modelSolLuna = glm::scale(modelSolLuna, glm::vec3(7.0f, 7.0f, 7.0f));
+			glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelSolLuna));
+			sol.Draw(lightingShader);
+		}
+		else {
+			modelSolLuna = glm::scale(modelSolLuna, glm::vec3(7.0f, 7.0f, 7.0f));
+			glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(modelSolLuna));
+			luna.Draw(lightingShader);
+		}
+		
 		// Create camera transformations
 		glm::mat4 view;
 		view = camera.GetViewMatrix();
@@ -300,26 +330,56 @@ int main()
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-
 		glm::mat4 model(1);
-
-
-
 		//Carga de modelo 
-		view = camera.GetViewMatrix();
-		model = glm::mat4(1);
+		// perro
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		Piso.Draw(lightingShader);
+		dog.Draw(lightingShader);
 
-
-
-		model = glm::mat4(1);
-		//glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		// escudo
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		model = glm::translate(model, glm::vec3(0.4f, -0.4f, 0.6f));
+		model = glm::rotate(model, glm::degrees(100.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 0);
-		Dog.Draw(lightingShader);
-		//glDisable(GL_BLEND);  //Desactiva el canal alfa 
+		escudo.Draw(lightingShader);
+
+		// casa1
+		model = glm::scale(model, glm::vec3(15.0f, 15.0f, 15.0f));
+		model = glm::translate(model, glm::vec3(-0.4f, 0.38f, -0.25f));
+		model = glm::rotate(model, glm::degrees(-10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		casa1.Draw(lightingShader);
+
+		// casa2
+		model = glm::translate(model, glm::vec3(1.2f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		casa2.Draw(lightingShader);
+
+		// camino
+		model = glm::scale(model, glm::vec3(2.0f, 1.0f, 2.0f));
+		model = glm::translate(model, glm::vec3(-0.3f, -0.4f, -0.35f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		camino.Draw(lightingShader);
+
+		// camino complemento
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		camino.Draw(lightingShader);
+
+		// estatua
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.3f));
+		model = glm::translate(model, glm::vec3(-1.6f, 0.47f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		estatua.Draw(lightingShader);
+
+		// fogata
+		glm::mat4 modelFogata(1);
+		modelFogata = glm::scale(modelFogata, glm::vec3(2.5f, 1.0f, 2.5f));
+		modelFogata = glm::translate(modelFogata, glm::vec3(pointLightPositions[0].x, pointLightPositions[0].y, pointLightPositions[0].z));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelFogata));
+		fogata.Draw(lightingShader);
+
 		glBindVertexArray(0);
 
 
@@ -337,19 +397,7 @@ int main()
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		// Draw the light object (using light's vertex attributes)
-		for (GLuint i = 0; i < 1; i++)
-		{
-			model = glm::mat4(1);
-			model = glm::translate(model, pointLightPositions[i]);
-			model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			glBindVertexArray(VAO);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
 		glBindVertexArray(0);
-
-
 
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
@@ -443,6 +491,26 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		else if (action == GLFW_RELEASE)
 		{
 			keys[key] = false;
+		}
+	}
+
+	if (key == GLFW_KEY_O)
+	{
+		dia = true;
+		if (moveDirLight.z > -70.0f)
+		{
+			moveDirLight.z -= 0.1f;
+			moveDirLight.y = 20.0f * sin((-3.1416f / 70.0f) * moveDirLight.z);
+		}
+
+	}
+	if (key == GLFW_KEY_L)
+	{
+		dia = false;
+		if (moveDirLight.z < 0.0f)
+		{
+			moveDirLight.z += 0.1f;
+			moveDirLight.y = 20.0f * sin((-3.1416f / 70.0f) * moveDirLight.z);
 		}
 	}
 
