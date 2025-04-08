@@ -106,7 +106,10 @@ float vertices[] = {
 glm::vec3 Light1 = glm::vec3(0);
 //Anim
 float rotBall = 0;
+float saltoBall = 0;
 bool AnimBall = false;
+bool AnimBallSalto = false;
+bool arriba = true;
 
 
 // Deltatime
@@ -301,6 +304,7 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "transparency"), 1);
 		model = glm::rotate(model, glm::radians(rotBall), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, saltoBall, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	    Ball.Draw(lightingShader); 
 		glDisable(GL_BLEND);  //Desactiva el canal alfa 
@@ -446,16 +450,35 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		AnimBall = !AnimBall;
 		
 	}
+	if (keys[GLFW_KEY_M])
+	{
+		AnimBallSalto = !AnimBallSalto;
+
+	}
 }
 void Animation() {
 	if (AnimBall)
 	{
 		rotBall += 0.2f;
-		//printf("%f", rotBall);
 	}
-	else
+	if (AnimBallSalto)
 	{
-		//rotBall = 0.0f;
+		if (arriba)
+		{
+			saltoBall += 0.005f;
+			if (saltoBall > 2.3f)
+			{
+				arriba = false;
+			}
+		}
+		else
+		{
+			saltoBall -= 0.005f;
+			if (saltoBall < 0.3f)
+			{
+				arriba = true;
+			}
+		}
 	}
 }
 
