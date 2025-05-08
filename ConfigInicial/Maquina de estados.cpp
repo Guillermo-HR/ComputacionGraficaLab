@@ -543,8 +543,11 @@ void Animation() {
 			}
 		}
 		dogPos.z += 0.001f;
+		if (dogPos.z > 2.0f)
+		{
+			dogAnim = 0;
+		}
 	}
-	
 }
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
